@@ -12,15 +12,15 @@
       </li>
       <li class="list-group-item">
         <span>번호 : </span>
-        <span class="badge bg-primary">1234</span>
+        <span class="badge bg-primary" th:text="${product.id}">1234</span>
       </li>
       <li class="list-group-item">
         <span>등록날짜 : </span>
-        <span>2024-07-08</span>
+        <span class="font-bold" th:text="${#temporals.format(product.createDate, 'yyyy-MM-dd HH:mm')}"></span>
       </li>
       <li class="list-group-item">
         <span>수정날짜 : </span>
-        <span>2024-07-08</span>
+        <span class="font-bold" th:text="${#temporals.format(product.modifyDate, 'yyyy-MM-dd HH:mm')}">2024-07-08</span>
       </li>
       <li class="list-group-item">
         <span>상품명 : </span>
