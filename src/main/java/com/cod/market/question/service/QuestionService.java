@@ -28,4 +28,8 @@ public class QuestionService {
         question.setCreateDate(LocalDateTime.now());
         questionRepository.save(question);
     }
+
+    public List<Question> getList() {
+        return questionRepository.findAll();
+    }
 }

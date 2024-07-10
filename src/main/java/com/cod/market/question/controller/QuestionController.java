@@ -25,7 +25,6 @@ public class QuestionController {
     private final MemberService memberService;
     private final ProductService productService;
 
-
     @PostMapping("/create/{id}")
     public String create(@PathVariable("id") Long id,
                          @RequestParam("content") String content,
