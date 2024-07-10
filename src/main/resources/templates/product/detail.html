@@ -42,11 +42,7 @@
         질문등록
       </div>
       <div class="card-body">
-        <form sec:authorize="isAuthenticated()" action="@{/question/create}" method="POST">
-          <div class="mb-3">
-            <label for="subject" class="form-label">제목</label>
-            <input type="text" name="subject" id="subject" class="form-control">
-          </div>
+        <form sec:authorize="isAuthenticated()" th:action="@{/question/create}" method="POST">
           <div class="mb-3">
             <label for="content" class="form-label">내용</label>
             <input type="content" name="content" id="content" class="form-control">
@@ -54,7 +50,7 @@
           <input type="submit" value="등록하기" class="btn btn-primary">
         </form>
         <div sec:authorize="isAnonymous()">
-          <a href="@{/member/login}">로그인</a> 후 이용해주세요.
+          <a th:href="@{/member/login}">로그인</a> 후 이용해주세요.
         </div>
       </div>
     </div>
