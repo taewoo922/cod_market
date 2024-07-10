@@ -24,7 +24,6 @@ public class QuestionService {
         question.setProduct(product);
         question.setMember(member);
         question.setBody(content);
-        question.setId(member.getId());
         question.setCreateDate(LocalDateTime.now());
         questionRepository.save(question);
     }
