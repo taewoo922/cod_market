@@ -42,10 +42,10 @@
         질문등록
       </div>
       <div class="card-body">
-        <form sec:authorize="isAuthenticated()" th:action="@{/question/create}" method="POST">
+        <form sec:authorize="isAuthenticated()" th:action="@{|/question/create/${product.id}|}" method="POST">
           <div class="mb-3">
             <label for="content" class="form-label">내용</label>
-            <input type="content" name="content" id="content" class="form-control">
+            <input type="text" name="content" id="content" class="form-control">
           </div>
           <input type="submit" value="등록하기" class="btn btn-primary">
         </form>
@@ -59,9 +59,9 @@
           질문 리스트
       </div>
       <ul class="list-group list-group-flush gap-2">
-        <li class="list-group-item">
+        <li th:each="question, loop : ${questionList}" class="list-group-item">
           <span class="badge bg-secondary">질문 ID</span>
-          <span>질문 내용</span>
+          <span th:text="${question.body}">질문 내용</span>
 
           <a href="#" class="btn btn-sm btn-info">수정</a>
           <a href="#" class="btn btn-sm btn-warning" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
