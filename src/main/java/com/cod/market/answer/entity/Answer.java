@@ -10,6 +10,7 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Answer extends BaseEntity {
+    private String subject;
     private String content;
 
     @OneToOne

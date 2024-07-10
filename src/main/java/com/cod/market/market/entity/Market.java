@@ -15,10 +15,10 @@ public class Market extends BaseEntity {
     private String name;
     private String email;
     private String info;
-    private List<Product> productList;
 
     @OneToOne
     private Member member;
     @OneToMany(mappedBy = "market", cascade = CascadeType.REMOVE)
-    private Product product;
+    private List<Product> productList;
+
 }
