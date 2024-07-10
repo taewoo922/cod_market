@@ -5,6 +5,7 @@ import com.cod.market.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.beans.PropertyDescriptor;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -25,9 +26,11 @@ public class ProductService {
         productRepository.save(p);
     }
 
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
+
+    public Product getProduct(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        // TODO: 없을 경우 예외 처리 예정
+
+        return product.get();
     }
-
-
 }
