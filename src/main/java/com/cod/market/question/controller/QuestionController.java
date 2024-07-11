@@ -58,5 +58,14 @@ public class QuestionController {
         return String.format("redirect:/product/detail/%s", product.getId());
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        Question question = questionService.getQuestion(id);
+        questionService.delete(question);
+        Product product = productService.getProduct(id);
+
+        return String.format("redirect:/product/detail/%s", product.getId());
+    }
+
 
 }
