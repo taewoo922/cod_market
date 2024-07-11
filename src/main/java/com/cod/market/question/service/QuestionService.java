@@ -23,12 +23,29 @@ public class QuestionService {
         Question question = new Question();
         question.setProduct(product);
         question.setMember(member);
-        question.setBody(content);
+        question.setContent(content);
         question.setCreateDate(LocalDateTime.now());
         questionRepository.save(question);
     }
 
     public List<Question> getList() {
         return questionRepository.findAll();
+    }
+
+    public Question getQuestion(Long id) {
+        Optional<Question> question = questionRepository.findById(id);
+        if (question.isPresent()) {
+            return question.get();
+        } else {
+            throw new DataNotFoundException("question not found");
+        }
+    }
+
+    public void modify(Question question, String content) {
+
+        question.setContent(content);
+        question.setModifyDate(LocalDateTime.now());
+
+        questionRepository.save(question);
     }
 }

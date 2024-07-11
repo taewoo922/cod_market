@@ -39,5 +39,24 @@ public class QuestionController {
         return String.format("redirect:/product/detail/%s", id);
     }
 
+    @GetMapping("/modify/{id}")
+    public String modify(@PathVariable("id") Long id, Model model) {
+        Question question = questionService.getQuestion(id);
+        model.addAttribute("question", question);
+
+        return "question/modify";
+    }
+
+    @PostMapping("/modify/{id}")
+    public String modify(@PathVariable("id") Long id,
+                         @RequestParam("content") String content) {
+        Question question = questionService.getQuestion(id);
+        Product product = productService.getProduct(id);
+
+        questionService.modify(question, content);
+
+        return String.format("redirect:/product/detail/%s", product.getId());
+    }
+
 
 }

@@ -12,27 +12,23 @@
           <img class="w-full max-w-[300px]" src="https://i.imgur.com/PVsCFy1.png" alt="">
         </li>
         <li class="list-group-item">
-          <span>번호 : </span>
+          <span class="font-bold">번호 : </span>
           <span class="badge bg-primary" th:text="${product.id}">1234</span>
         </li>
         <li class="list-group-item">
-          <span>등록날짜 : </span>
-          <span class="font-bold" th:text="${#temporals.format(product.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+          <span class="font-bold" th:text="'등록날짜 : ' + ${#temporals.format(product.createDate, 'yyyy-MM-dd HH:mm')}"></span>
         </li>
         <li class="list-group-item">
-          <span>수정날짜 : </span>
-          <span class="font-bold" th:text="${#temporals.format(product.modifyDate, 'yyyy-MM-dd HH:mm')}">2024-07-08</span>
+          <span class="font-bold" th:text="'수정날짜 : ' + ${#temporals.format(product.modifyDate, 'yyyy-MM-dd HH:mm')}">2024-07-08</span>
         </li>
         <li class="list-group-item">
-          <span>상품명 : </span>
-          <span class="font-bold" th:text="${product.name}"></span>
+          <span class="font-bold" th:text="'상품명 : ' + ${product.name}"></span>
         </li>
         <li class="list-group-item">
-          <span>가격 : </span>
-          <span class="font-bold" th:text="${product.price}"></span>원
+          <span class="font-bold" th:text="'가격 : ' + ${product.price}"></span>원
         </li>
         <li class="list-group-item">
-          <span>마켓 : </span>
+          <span class="font-bold">마켓 : </span>
           <span class="badge bg-primary">cod</span>
         </li>
       </ul>
@@ -45,7 +41,7 @@
         <form sec:authorize="isAuthenticated()" th:action="@{|/question/create/${product.id}|}" method="POST">
           <div class="mb-3">
             <label for="content" class="form-label">내용</label>
-            <input type="text" name="content" id="content" class="form-control">
+            <textarea type="text" name="content" id="content" class="form-control" row="7"></textarea>
           </div>
           <input type="submit" value="등록하기" class="btn btn-primary">
         </form>
@@ -61,9 +57,9 @@
       <ul class="list-group list-group-flush gap-2">
         <li th:each="question, loop : ${questionList}" class="list-group-item">
           <span th:text="${question.id}" class="badge bg-secondary"></span>
-          <span th:text="${question.body}" class="badge bg-secondary"></span>
+          <span th:text="${question.content}" class="badge bg-secondary"></span>
 
-          <a href="#" class="btn btn-sm btn-info">수정</a>
+          <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm btn-info">수정</a>
           <a href="#" class="btn btn-sm btn-warning" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
         </li>
       </ul>
