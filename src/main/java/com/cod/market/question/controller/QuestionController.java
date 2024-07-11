@@ -1,5 +1,6 @@
 package com.cod.market.question.controller;
 
+import com.cod.market.DataNotFoundException;
 import com.cod.market.member.entity.Member;
 import com.cod.market.member.service.MemberService;
 import com.cod.market.product.entity.Product;
@@ -9,10 +10,13 @@ import com.cod.market.question.service.QuestionService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,6 +29,7 @@ public class QuestionController {
     private final MemberService memberService;
     private final ProductService productService;
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create/{id}")
     public String create(@PathVariable("id") Long id,
                          @RequestParam("content") String content,
@@ -39,29 +44,46 @@ public class QuestionController {
         return String.format("redirect:/product/detail/%s", id);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String modify(@PathVariable("id") Long id, Model model) {
+    public String modify(@PathVariable("id") Long id, Model model, Principal principal) {
         Question question = questionService.getQuestion(id);
+        if ( !question.getMember().getUsername().equals(principal.getName()) ) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한 없음");
+        }
+
         model.addAttribute("question", question);
 
         return "question/modify";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
     public String modify(@PathVariable("id") Long id,
-                         @RequestParam("content") String content) {
+                         @RequestParam("content") String content,
+                         Principal principal) {
         Question question = questionService.getQuestion(id);
         Product product = productService.getProduct(id);
+        if ( !question.getMember().getUsername().equals(principal.getName()) ) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한 없음");
+        }
 
         questionService.modify(question, content);
 
         return String.format("redirect:/product/detail/%s", product.getId());
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id,
+                         Principal principal) {
         Question question = questionService.getQuestion(id);
         questionService.delete(question);
+
+        if ( !question.getMember().getUsername().equals(principal.getName()) ) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한 없음");
+        }
+
         Product product = productService.getProduct(id);
 
         return String.format("redirect:/product/detail/%s", product.getId());
