@@ -16,7 +16,8 @@
           <span class="badge bg-primary" th:text="${product.id}">1234</span>
         </li>
         <li class="list-group-item">
-          <span class="font-bold" th:text="'등록날짜 : ' + ${#temporals.format(product.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+          <span class="font-bold"
+                th:text="'등록날짜 : ' + ${#temporals.format(product.createDate, 'yyyy-MM-dd HH:mm')}"></span>
         </li>
         <li class="list-group-item">
           <span class="font-bold" th:text="'수정날짜 : ' + ${#temporals.format(product.modifyDate, 'yyyy-MM-dd HH:mm')}">2024-07-08</span>
@@ -52,15 +53,24 @@
     </div>
     <div class="card mt-[30px]">
       <div class="card-header">
-          질문 리스트
+        질문 리스트
       </div>
       <ul class="list-group list-group-flush gap-2">
         <li th:each="question, loop : ${product.questionList}" class="list-group-item">
           <span th:text="${question.id}" class="badge bg-secondary"></span>
           <span th:text="${question.content}" class="badge bg-secondary"></span>
 
-          <a sec:authorize="isAuthenticated()" th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.username}" th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm btn-info">수정</a>
-          <a sec:authorize="isAuthenticated()" th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.username}"  th:href="@{|/question/delete/${question.id}}" class="btn btn-sm btn-warning" onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
+          <a
+              sec:authorize="isAuthenticated()"
+              th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.username}"
+              th:href="@{|/question/modify/${question.id}|}"
+              class="btn btn-outline-info btn-sm">수정</a>
+          <a
+              sec:authorize="isAuthenticated()"
+              th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.username}"
+              th:href="@{|/question/delete/${question.id}}"
+              onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;"
+              class="btn btn-outline-info btn-sm">삭제</a>
         </li>
       </ul>
       <script>

@@ -45,7 +45,7 @@
             <label for="content" class="form-label">내용</label>
             <textarea th:text="${question.content}" name="content" id="content" class="form-control" row="7"></textarea>
           </div>
-          <input type="submit" value="질문수정" class="btn btn-primary ml-2">
+          <input type="submit" value="질문수정" class="btn btn-primary">
           <a th:href="@{|/product/detail/${question.product.id}|}" class="btn btn-primary ml-2">취소</a>
         </form>
         <script>

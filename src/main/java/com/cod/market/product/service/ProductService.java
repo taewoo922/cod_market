@@ -4,6 +4,9 @@ import com.cod.market.DataNotFoundException;
 import com.cod.market.product.entity.Product;
 import com.cod.market.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.beans.PropertyDescriptor;
@@ -16,8 +19,10 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public List<Product> getList() {
-        return productRepository.findAll();
+    public Page<Product> getList(int page) {
+        Pageable pageable = PageRequest.of(page, 8);
+
+        return productRepository.findAll(pageable);
     }
 
     public void create(String name, int price) {
