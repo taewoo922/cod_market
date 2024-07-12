@@ -1,9 +1,8 @@
 package com.cod.market.question.service;
 
-import com.cod.market.DataNotFoundException;
+import com.cod.market.security.exception.DataNotFoundException;
 import com.cod.market.member.entity.Member;
 import com.cod.market.product.entity.Product;
-import com.cod.market.question.controller.QuestionController;
 import com.cod.market.question.entity.Question;
 import com.cod.market.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,25 +1,20 @@
 package com.cod.market.question.controller;
 
-import com.cod.market.DataNotFoundException;
 import com.cod.market.member.entity.Member;
 import com.cod.market.member.service.MemberService;
 import com.cod.market.product.entity.Product;
 import com.cod.market.product.service.ProductService;
 import com.cod.market.question.entity.Question;
 import com.cod.market.question.service.QuestionService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

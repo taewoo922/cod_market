@@ -1,6 +1,6 @@
 package com.cod.market.product.service;
 
-import com.cod.market.DataNotFoundException;
+import com.cod.market.security.exception.DataNotFoundException;
 import com.cod.market.product.entity.Product;
 import com.cod.market.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.beans.PropertyDescriptor;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

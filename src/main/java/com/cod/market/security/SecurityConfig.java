@@ -1,5 +1,6 @@
 package com.cod.market.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -17,6 +19,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+    @Autowired
+    private OAuth2UserService oauth2UserService;
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -25,8 +29,14 @@ public class SecurityConfig {
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/member/login")
                         .defaultSuccessUrl("/"))
-                .oauth2Login()
-                .and()
+                .oauth2Login(
+                        oauth2Login -> oauth2Login
+                                .loginPage("/member/login")
+                                .userInfoEndpoint(
+                                        userInfoEndpoint -> userInfoEndpoint
+                                        .userService(oauth2UserService)
+                                )
+                )
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/")

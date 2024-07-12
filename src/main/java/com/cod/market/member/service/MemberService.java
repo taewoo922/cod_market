@@ -1,6 +1,6 @@
 package com.cod.market.member.service;
 
-import com.cod.market.DataNotFoundException;
+import com.cod.market.security.exception.DataNotFoundException;
 import com.cod.market.member.entity.Member;
 import com.cod.market.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
