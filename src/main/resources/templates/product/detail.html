@@ -9,7 +9,7 @@
 
       <ul class="list-group list-group-flush gap-2">
         <li class="list-group-item">
-          <img class="w-full max-w-[300px]" src="https://i.imgur.com/PVsCFy1.png" alt="">
+          <img class="w-full max-w-[300px]" th:src="@{|/gen/${product.thumbnailImg}}" alt="상품이미지">
         </li>
         <li class="list-group-item">
           <span class="font-bold">번호 : </span>
@@ -24,6 +24,9 @@
         </li>
         <li class="list-group-item">
           <span class="font-bold" th:text="'상품명 : ' + ${product.name}"></span>
+        </li>
+        <li class="list-group-item">
+          <span class="font-bold" th:text="'상품설명 : ' + ${product.description}"></span>
         </li>
         <li class="list-group-item">
           <span class="font-bold" th:text="'가격 : ' + ${product.price}"></span>원
