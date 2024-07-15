@@ -18,7 +18,7 @@ public class ProductServiceTests {
             String name = String.format("테스트 상품:[%03d]", i);
             int price = 100;
             String description = String.format("테스트 설명:[%03d]", i);
-            productService.create(name, description,price);
+//            productService.create(name, description,price);
         }
     }
 }

@@ -31,11 +31,14 @@ public class Product extends BaseEntity {
     private int price;
     private int hitCount;
     private String isActive;
+    private String thumbnailImg;
 
     @ManyToOne
     private Market market;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Question> questionList;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Cart> cartList;
 }
