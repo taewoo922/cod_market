@@ -6,7 +6,7 @@
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[20px] mt-3">
       <li th:each="product, loop : ${paging}" class="flex flex-col">
         <a th:href="@{|/product/detail/${product.id}|}" data-before="VIEW MORE">
-          <img class="block w-full" src="https://i.imgur.com/PVsCFy1.png" alt="">
+          <img class="block w-full"th:src="@{|/gen/${product.thumbnailImg}}" alt="thumbnailImg">
         </a>
         <a th:href="@{|/product/detail/${product.id}|}" th:text="${product.name}" class="text-center mt-2"></a>
         <a th:href="@{|/product/detail/${product.id}|}" th:text="${product.price}+원" class="text-center mt-2"></a>
