@@ -29,10 +29,11 @@ public class ProductService {
     }
 
     public void create(String name, int price) {
-        Product p = new Product();
-        p.setName(name);
-        p.setPrice(price);
-        p.setCreateDate(LocalDateTime.now());
+        Product p = Product.builder()
+                .name(name)
+                .price(price)
+                .build();
+
         productRepository.save(p);
     }
 

@@ -54,10 +54,14 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
                     String username = "KAKAO_%s".formatted(oauthId);
 
 
-                    member = new Member();
-                    member.setUsername(username);
-                    member.setNickname(nickname);
-                    member.setPassword("");
+                    member = Member.builder()
+                            .username(username)
+                            .password("")
+                            .email("")
+                            .nickname(nickname)
+                            .build();
+
+
                     memberRepository.save(member);
                 }
             }
