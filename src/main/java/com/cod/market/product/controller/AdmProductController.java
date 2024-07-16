@@ -32,9 +32,9 @@ public class AdmProductController {
 
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String createContent(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("price") int price,
+    public String createContent(@RequestParam("title") String title, @RequestParam("description") String description, @RequestParam("price") int price,
                                 @RequestParam("thumbnail")MultipartFile thumbnail) {
-        productService.create(name,description,price, thumbnail);
+        productService.create(title,description,price, thumbnail);
         return "adm/product/create";
     }
 }

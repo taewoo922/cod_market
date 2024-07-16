@@ -21,9 +21,9 @@
           <td><input type="checkbox" class="form-check-input chkbox"></td>
           <td>
             <img class="w-[50px] h-[50px] sm:w-[100px] sm:h-[100px] object-fit:cover"
-                 th:src="@{|/gen/${product.thumbnailImg}}" alt="thumbnailImg">
+                 th:src="@{|/gen/${cartItem.product.thumbnailImg}|}" alt="이미지가 존재하지 않습니다.">
           </td>
-          <td th:text="${cartItem.product.name}"></td>
+          <td th:text="${cartItem.product.title}"></td>
           <td th:text="${cartItem.product.price}"></td>
           <td>
             <a href="#" type="button" class="btn btn-link">구매</a>
