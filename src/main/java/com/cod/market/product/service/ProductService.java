@@ -51,10 +51,20 @@ public class ProductService {
 
 
         Product p = Product.builder()
-                .name(name)
+                .title(name)
                 .description(description)
                 .price(price)
                 .thumbnailImg(thumbnailRelPath)
+                .build();
+
+        productRepository.save(p);
+    }
+
+    public void create(String name, String description, int price) {
+        Product p = Product.builder()
+                .title(name)
+                .description(description)
+                .price(price)
                 .build();
 
         productRepository.save(p);

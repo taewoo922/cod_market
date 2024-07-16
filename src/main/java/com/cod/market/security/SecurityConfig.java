@@ -22,11 +22,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     @Autowired
     private OAuth2UserService oauth2UserService;
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                    .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/member/login")
                         .defaultSuccessUrl("/"))
@@ -35,14 +36,14 @@ public class SecurityConfig {
                                 .loginPage("/member/login")
                                 .userInfoEndpoint(
                                         userInfoEndpoint -> userInfoEndpoint
-                                        .userService(oauth2UserService)
+                                                .userService(oauth2UserService)
                                 )
                 )
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true))
-                ;
+        ;
 
         return http.build();
     }

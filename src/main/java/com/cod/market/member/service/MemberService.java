@@ -20,8 +20,8 @@ public class MemberService {
     public Member join(String username, String password, String email, String nickname) {
         Member member = Member.builder()
                 .username(username)
-                .password(password)
-                .email("kakao@test.com")
+                .password(passwordEncoder.encode(password))
+                .email(email)
                 .nickname(nickname)
                 .build();
 
