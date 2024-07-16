@@ -1,6 +1,7 @@
 package com.cod.market.security.service;
 
 import com.cod.market.member.entity.Member;
+import com.cod.market.member.entity.MemberRole;
 import com.cod.market.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +31,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         Member member = _member.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
+
+        if ("admin".equals(username)) {
+            authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
+        } else {
+            authorities.add(new SimpleGrantedAuthority(MemberRole.MEMBER.getValue()));
+        }
 
         authorities.add(new SimpleGrantedAuthority("member"));
 
