@@ -26,6 +26,8 @@ public class Member extends BaseEntity {
     private String email;
     private String isActive;
 
+
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Product> productList;
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)

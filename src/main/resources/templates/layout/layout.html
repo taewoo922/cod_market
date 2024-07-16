@@ -47,7 +47,7 @@
             <a class="nav-link" href="/product/list">강의리스트</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/cart/list">장바구니</a>
+            <a class="nav-link" sec:authorize="isAuthenticated()" href="/cart/list">장바구니</a>
           </li>
 
           <li class="nav-item">
@@ -57,6 +57,10 @@
 
           <li class="nav-item">
             <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/join}">회원가입</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/adm">관리자 홈</a>
           </li>
         </ul>
         <div class="text-white mr-5" sec:authorize="isAuthenticated()" th:text="@{|${#authentication.name}님|}"></div>
