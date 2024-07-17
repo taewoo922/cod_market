@@ -2,7 +2,7 @@ package com.cod.market.order.controller;
 
 
 
-import net.minidev.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,12 @@ import java.util.Base64;
 public class OrderController {
     @Value("${custom.paymentSecretKey}")
     private String paymentSecretKey;
+
+    @GetMapping("/detail")
+    public String detail() {
+        return "order/detail";
+    }
+
     @GetMapping("/success")
     public String paymentResult(
             Model model,
@@ -80,7 +86,7 @@ public class OrderController {
             model.addAttribute("message", (String) jsonObject.get("message"));
         }
 
-        return "success";
+        return "order/success";
     }
 
     @GetMapping("/fail")
@@ -93,6 +99,6 @@ public class OrderController {
         model.addAttribute("code", code);
         model.addAttribute("message", message);
 
-        return "fail";
+        return "order/fail";
     }
 }
